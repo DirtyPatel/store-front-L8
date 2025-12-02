@@ -42,4 +42,4 @@ When the app is running, you should see output similar to the following:
   To create a production build, run npm run build.
 ```
 
-Open a browser and navigate to `http://localhost:8080/`. You should see the store front app running.
+Open a browser and navigate to `http://localhost:8080/`. You should see the store front app running. This is my addition to trigger the workflow.
