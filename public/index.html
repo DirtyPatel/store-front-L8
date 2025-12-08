@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- BestBuy Style Favicon (keep your favicon.ico OR replace with a BB one later) -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+
+    <!-- Fonts (Inter = modern retail style) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO -->
+    <title>BestBuy Storefront</title>
+    <meta
+      name="description"
+      content="Cloud-native BestBuy storefront built using Vue.js and microservices."
+    />
+    <meta name="theme-color" content="#0046be" />
   </head>
-  <body>
+
+  <body style="margin:0; font-family: 'Inter', sans-serif;">
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>This app requires JavaScript to run. Please enable it to continue.</strong>
     </noscript>
+
+    <!-- Your entire Vue app mounts here -->
     <div id="app"></div>
-    <!-- built files will be auto injected -->
   </body>
 </html>
