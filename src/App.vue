@@ -108,141 +108,90 @@ export default {
 </script>
 
 <style>
+/* ===== Global BestBuy-Themed Styles ===== */
+
 body {
-  background-image: url('@/assets/algonquin.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Keeps the background in place when scrolling */
   margin: 0;
   padding: 0;
+  background-color: #f4f6f9; /* BestBuy clean gray */
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 120px;
+  color: #1f1f1f;
+  margin-top: 100px; /* space for sticky top nav */
 }
 
+/* Remove old green footer */
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #0a5620;
-  color: #fff;
-  padding: 1rem;
-  margin: 0;
+  display: none;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  margin: 0 1rem;
-}
-
-a {
-  color: #fff;
-  text-decoration: none;
-}
-
+/* Buttons (BestBuy Blue) */
 button {
-  padding: 10px;
-  background-color: #005f8b;
+  padding: 10px 16px;
+  background-color: #0046be; /* BestBuy blue */
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  height: 42px;
+  transition: background 0.2s ease;
 }
 
+button:hover {
+  background-color: #003a9d;
+}
+
+/* PRODUCT GRID */
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 2rem;
 }
 
+/* PRODUCT CARD */
 .product-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem;
+  background: #fff;
+  border-radius: 6px;
   padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
 }
 
 .product-card img {
-  max-width: 100%;
+  max-width: 85%;
+  height: 180px;
+  object-fit: contain;
   margin-bottom: 1rem;
-}
-
-.product-card a {
-  text-decoration: none;
-  color: #333;
 }
 
 .product-card h2 {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.product-card p {
-  margin-bottom: 1rem;
-}
-
-.product-controls {
-  display: flex;
-  align-items: center;
-  margin-top: 0.5rem;
-}
-
-.product-controls p {
-  margin-right: 20px;
-}
-
-.product-controls button:hover {
-  background-color: #005f8b;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 48px;
 }
 
 .product-price {
+  font-size: 1.3rem;
   font-weight: bold;
-  font-size: 1.2rem;
+  color: #0046be;
 }
 
-.quantity-input {
-  width: 50px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
-  margin-right: 10px;
-}
-
+/* Shopping Cart Table */
 .shopping-cart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.shopping-cart h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  width: 90%;
+  margin: 0 auto;
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
 }
 
 .shopping-cart-table {
@@ -250,33 +199,20 @@ button {
   border-collapse: collapse;
 }
 
-.shopping-cart-table th,
-.shopping-cart-table td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
 .shopping-cart-table th {
+  background: #f2f4f7;
   font-weight: bold;
 }
 
-.shopping-cart-table td img {
-  display: block;
-  margin: 0 auto;
+.shopping-cart-table td, .shopping-cart-table th {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
 }
 
 .checkout-button {
   margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007acc;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  width: 200px;
+  font-size: 1rem;
 }
 
-.checkout-button:hover {
-  background-color: #005f8b;
-}
 </style>
