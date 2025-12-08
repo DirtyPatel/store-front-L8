@@ -4,7 +4,7 @@
       v-for="product in products"
       :key="product.id"
       :product="product"
-      @addToCart="addToCart"
+      @addToCart="forwardAddToCart"
     />
   </div>
 </template>
@@ -19,8 +19,8 @@ export default {
     ProductCard,
   },
   methods: {
-    addToCart({ productId, quantity }) {
-      this.$emit("addToCart", { productId, quantity });
+    forwardAddToCart(payload) {
+      this.$emit("addToCart", payload);
     },
   },
 };
@@ -30,7 +30,9 @@ export default {
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 </style>

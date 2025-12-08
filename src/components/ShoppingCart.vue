@@ -1,47 +1,52 @@
 <template>
-  <div class="cart-wrapper">
+  <div class="cart-container">
+    <h2 class="cart-title">Your Cart</h2>
 
-    <h1>Your Cart</h1>
+    <div v-if="hasCartItems" class="cart-content">
+      <table class="shopping-cart-table">
+        <thead>
+          <tr>
+            <th class="left">Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
 
-    <table v-if="hasCartItems" class="cart-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>Total</th>
-          <th></th>
-        </tr>
-      </thead>
+        <tbody>
+          <tr 
+            v-for="item in cartItems" 
+            :key="item.product.id"
+          >
+            <td class="left product-name">
+              {{ item.product.name }}
+            </td>
 
-      <tbody>
-        <tr v-for="(item, index) in cartItems" :key="item.product.id">
-          <td>{{ item.product.name }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>${{ item.product.price.toFixed(2) }}</td>
-          <td>${{ getItemTotal(item) }}</td>
+            <td>{{ item.quantity }}</td>
 
-          <td>
-            <button class="remove-btn" @click="$emit('removeFromCart', index)">
-              Remove
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td>\${{ item.product.price.toFixed(2) }}</td>
 
-    <p v-else class="empty-msg">
-      Your cart is empty.
-    </p>
+            <td class="bold">\${{ getItemTotal(item) }}</td>
 
-    <button 
-      v-if="hasCartItems"
-      class="checkout-btn"
-      @click="$emit('submitOrder')"
-    >
-      Checkout
-    </button>
+            <td>
+              <button class="remove-btn" @click="removeFromCart(item)">
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+      <button class="checkout-btn" @click="submitOrder">
+        Checkout
+      </button>
+    </div>
+
+    <div v-else class="empty-state">
+      <h3>Your cart is empty</h3>
+      <p>Browse products and add something you like!</p>
+    </div>
   </div>
 </template>
 
@@ -57,82 +62,92 @@ export default {
   methods: {
     getItemTotal(item) {
       return (item.quantity * item.product.price).toFixed(2);
+    },
+    removeFromCart(item) {
+      const index = this.cartItems.indexOf(item);
+      if (index > -1) {
+        this.$emit("removeFromCart", index);
+      }
+    },
+    submitOrder() {
+      this.$emit("submitOrder");
     }
   }
 };
 </script>
 
 <style scoped>
-.cart-wrapper {
-  padding: 2rem;
-  background: white;
-  margin: 2rem auto;
+.cart-container {
   max-width: 900px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 40px auto;
+  padding: 16px;
 }
 
-h1 {
-  margin-bottom: 1rem;
-  color: #0046be;
+.cart-title {
+  font-size: 28px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: 700;
 }
 
-/* TABLE */
-.cart-table {
+.shopping-cart-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 2rem;
+  margin-bottom: 24px;
 }
 
-.cart-table th {
-  background: #f4f6f8;
+.shopping-cart-table th,
+.shopping-cart-table td {
   padding: 12px;
-  text-align: left;
-  font-size: 14px;
-  border-bottom: 2px solid #d9dde3;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
-.cart-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
+.left {
+  text-align: left !important;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.product-name {
+  width: 45%;
 }
 
 .remove-btn {
-  background: #bb0628;
+  background-color: #e53935;
   color: white;
-  padding: 6px 12px;
   border: none;
+  padding: 8px 14px;
   border-radius: 4px;
-  font-size: 13px;
   cursor: pointer;
 }
 
 .remove-btn:hover {
-  background: #a00522;
+  background-color: #c62828;
 }
 
-/* EMPTY */
-.empty-msg {
-  text-align: center;
-  font-size: 18px;
-  color: #555;
-}
-
-/* CHECKOUT BUTTON */
 .checkout-btn {
-  background: #ffe000;
-  color: #001e73;
-  padding: 14px 24px;
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto 0;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #ffe000;
+  color: #001e73;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .checkout-btn:hover {
-  background: #ffea00;
+  background-color: #fff200;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 40px;
+  color: #444;
 }
 </style>
