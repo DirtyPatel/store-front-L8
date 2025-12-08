@@ -1,129 +1,148 @@
 <template>
-  <nav>
-    <div class="logo">
-      <a href="/">
-        <img src="/algonquin-pet-store.png" alt="Algonquin Pet Store Logo">
-      </a>
+  <nav class="nav-bar">
+    <div class="logo-area">
+      <router-link to="/">
+        <img src="/bestbuy-logo.png" alt="BestBuy Logo" class="logo-img" />
+      </router-link>
     </div>
+
     <button class="hamburger" @click="toggleNav">
       <span class="hamburger-icon"></span>
     </button>
-    <ul class="nav-links" :class="{ 'nav-links--open': isNavOpen }">
-      <li><router-link to="/" @click="closeNav">Products</router-link></li>
-      <li><router-link to="/cart" @click="closeNav">Cart ({{ cartItemCount }})</router-link></li>
+
+    <ul class="nav-links" :class="{ 'open': isNavOpen }">
+      <li>
+        <router-link to="/" @click="closeNav">Products</router-link>
+      </li>
+      <li>
+        <router-link to="/cart" @click="closeNav">
+          🛒 Cart 
+          <span class="cart-count">{{ cartItemCount }}</span>
+        </router-link>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'TopNav',
-  props: ['cartItemCount'],
+  name: "TopNav",
+  props: ["cartItemCount"],
   data() {
-    return {
-      isNavOpen: false
-    }
+    return { isNavOpen: false };
   },
   methods: {
     toggleNav() {
-      this.isNavOpen = !this.isNavOpen
+      this.isNavOpen = !this.isNavOpen;
     },
     closeNav() {
-      this.isNavOpen = false
+      this.isNavOpen = false;
     }
   }
-}
+};
 </script>
 
 <style scoped>
-nav {
+/* NAV BAR */
+.nav-bar {
+  background-color: #0046be;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3c673cd7;
-  color: #fff;
-  padding-top: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 0.25rem;
+  padding: 14px 20px;
   position: fixed;
+  width: 100%;
   top: 0;
-  left: 0;
-  right: 0;
+  z-index: 5000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-nav img {
-  width: 60px;
+.logo-img {
+  width: 120px;
   height: auto;
 }
 
+/* LINKS */
 .nav-links {
   display: flex;
   list-style: none;
-  font-size: 1.5rem;
+  gap: 24px;
   font-weight: bold;
+  font-size: 17px;
 }
 
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* CART COUNT BADGE */
+.cart-count {
+  background: #ffe000;
+  color: #001e73;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+/* MOBILE */
 .hamburger {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  margin: 0;
-  margin-top: -40px;
 }
 
 .hamburger-icon {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background-color: #fff;
+  width: 25px;
+  height: 3px;
+  background: white;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .hamburger-icon::before,
 .hamburger-icon::after {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 2px;
-  background-color: #fff;
+  content: "";
+  width: 25px;
+  height: 3px;
+  background: white;
   position: absolute;
   left: 0;
 }
 
 .hamburger-icon::before {
-  top: -6px;
+  top: -7px;
 }
 
 .hamburger-icon::after {
-  bottom: -6px;
+  top: 7px;
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: #333;
-    padding: 1rem;
-  }
-
-  .nav-links--open {
-    display: block;
-  }
-
-  .nav-links--open li {
-    padding: 0.5rem 0;
-  }
-
   .hamburger {
     display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    left: 0;
+    background: #003a9d;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.25rem;
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 }
 </style>
