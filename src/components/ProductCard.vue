@@ -1,6 +1,8 @@
 <template>
-  <div class="product-card">
-    <img :src="`/${product.image}`" :alt="product.name" class="product-image" />
+  <div class="product-card fixed-card">
+
+    <img :src="product.image" class="product-img" />
+
 
     <router-link :to="`/product/${product.id}`" class="product-title">
       <h2>{{ product.name }}</h2>
@@ -66,23 +68,26 @@ export default {
 <style scoped>
 .product-card {
   background: #ffffff;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
   display: flex;
   flex-direction: column;
   text-align: left;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  height: 100%;
 }
 
 .product-card:hover {
   box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+   transform: translateY(-2px);
 }
 
 .product-image {
   width: 100%;
   border-radius: 6px;
   margin-bottom: 10px;
+  object-fit: contain;
 }
 
 .product-title h2 {
@@ -95,6 +100,12 @@ export default {
   color: #444;
   font-size: 14px;
   margin-bottom: 8px;
+}
+.fixed-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 480px; /* adjust if needed */
 }
 
 /* ⭐ Rating Section */
