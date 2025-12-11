@@ -1,3 +1,4 @@
+
 name: Build, Test, and Deploy
 
 on:
@@ -30,15 +31,15 @@ jobs:
 
       - name: Build Docker Image
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+          DOCKER_USERNAME: dirtypatel
+          DOCKER_IMAGE_NAME: store-front-l8
         run: |
           docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:test .
 
       - name: Push Docker Image
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+          DOCKER_USERNAME: dirtypatel
+          DOCKER_IMAGE_NAME: store-front-l8
         run: |
           docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:test
 
@@ -79,7 +80,7 @@ jobs:
       - name: Promote Docker Image to Latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+          DOCKER_IMAGE_NAME: store-front-l8
         run: |
           docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:test
           docker tag $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:test $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:latest
@@ -98,7 +99,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+          DOCKER_IMAGE_NAME: store-front-l8
           DEPLOYMENT_NAME: ${{ vars.DEPLOYMENT_NAME }}
           CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
         run: |
